@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 })
 export class ProductsPage {
 
-  private url: string = 'http://payless.ecoagile.com.br';
+  private url: string = 'http://payless-api.ecoagile.com.br';
   public products: Array<{}>;
 
   constructor(
