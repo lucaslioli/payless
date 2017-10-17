@@ -7,10 +7,47 @@
 </ion-header>
 
 <ion-content padding>
-	<div *ngIf="dados"> <!-- Conditional structure - will only be displayed if 'dados' is defined -->
-		<p>{{dados.text}}</p>
-		<p>{{dados.format}}</p>
-		<p>{{dados.cancelled}}</p>
-	</div>
-  <button ion-button icon-left (click)="escanear()"><ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Scan</span></button>
+
+    {{ keyTeste }}
+
+	<div *ngIf="dadosQR">
+		<p>{{dadosQR.text}}</p>
+		<p>{{dadosQR.format}}</p>
+    <p>{{dadosQR.cancelled}}</p>
+    
+    <!-- <ion-list>
+      <button ion-item *ngFor="let element of dadosNFCE">
+        {{ element }}
+      </button>  
+    </ion-list> -->
+    
+
+  </div>
+    
+  <button ion-button icon-left (click)="scan()">
+    <ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Scan</span>
+  </button>
+
+  <div *ngIf="dadosNFCE">
+    <div><h1>DADOS DA NOTA</h1><hr></div>
+    
+    {{ dadosNFCE.estabelecimento.cnpj }}<br/>
+    {{ dadosNFCE.estabelecimento.endereco }}<br/>
+    {{ dadosNFCE.estabelecimento.inscricao_estadual }}<br/>
+    {{ dadosNFCE.estabelecimento.nome }}<br/><br/>
+    
+    {{ dadosNFCE.nfce.chave_acesso }}<br/>
+    {{ dadosNFCE.nfce.data_emissao }}<br/>
+    {{ dadosNFCE.nfce.hora_emissao }}<br/>
+    {{ dadosNFCE.nfce.numero }}<br/>
+    {{ dadosNFCE.nfce.protocolo }}<br/>
+    {{ dadosNFCE.nfce.serie }}<br/><br/>
+
+    {{ produtos[1].codigo }}
+    {{ produtos[1].descricao }}
+    {{ produtos[1].valor }}
+    {{ produtos[1].un }}<br/><br/>
+    
+  </div>
+
 </ion-content>

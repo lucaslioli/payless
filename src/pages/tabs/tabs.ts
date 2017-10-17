@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ScannerPage } from '../scanner/scanner';
+import { ProductsPage } from '../products/products';
 
 /**
  * Generated class for the TabsPage tabs.
@@ -19,6 +20,7 @@ export class TabsPage {
 
   homeRoot = HomePage
   scannerRoot = ScannerPage
+  productsRoot = ProductsPage
 
 
   constructor(public navCtrl: NavController) {}
