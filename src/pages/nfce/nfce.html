@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Dados da Nota Fiscal</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+  {{ key }}
+
+  <div *ngIf="dadosNFCE">
+    <div><h1>DADOS DA NOTA</h1><hr></div>
+    
+    {{ dadosNFCE.estabelecimento.cnpj }}<br/>
+    {{ dadosNFCE.estabelecimento.endereco }}<br/>
+    {{ dadosNFCE.estabelecimento.inscricao_estadual }}<br/>
+    {{ dadosNFCE.estabelecimento.nome }}<br/><br/>
+    
+    {{ dadosNFCE.nfce.chave_acesso }}<br/>
+    {{ dadosNFCE.nfce.data_emissao }}<br/>
+    {{ dadosNFCE.nfce.hora_emissao }}<br/>
+    {{ dadosNFCE.nfce.numero }}<br/>
+    {{ dadosNFCE.nfce.protocolo }}<br/>
+    {{ dadosNFCE.nfce.serie }}<br/><br/>
+
+    <div ion-item *ngFor="let p of produtos">
+      {{ p.codigo }}
+      {{ p.descricao }}
+      {{ p.valor }}
+      {{ p.un }}
+    </div>
+    
+  </div>
+</ion-content>

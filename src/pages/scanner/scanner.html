@@ -8,24 +8,17 @@
 
 <ion-content padding>
 
-    {{ keyTeste }}
-
-	<div *ngIf="dadosQR">
-		<p>{{dadosQR.text}}</p>
-		<p>{{dadosQR.format}}</p>
-    <p>{{dadosQR.cancelled}}</p>
-    
-    <!-- <ion-list>
-      <button ion-item *ngFor="let element of dadosNFCE">
-        {{ element }}
-      </button>  
-    </ion-list> -->
-    
-
-  </div>
+  <!-- {{ keyTeste }} -->
     
   <button ion-button icon-left (click)="scan()">
     <ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Scan</span>
+  </button>
+
+  <div *ngIf="waiting">Esperando resposta do servidor!</div>
+  <!-- {{ dadosNFCE }} -->
+
+  <!-- <button ion-button icon-left (click)="teste()">
+    <span style="padding-top: 1px">Teste</span>
   </button>
 
   <div *ngIf="dadosNFCE">
@@ -48,6 +41,6 @@
     {{ produtos[1].valor }}
     {{ produtos[1].un }}<br/><br/>
     
-  </div>
+  </div> -->
 
 </ion-content>
