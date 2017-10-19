@@ -7,12 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-    
-  <button ion-button icon-left (click)="scan()">
-    <ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Scan</span>
-  </button>
+  
+  <div *ngIf="cordovaAbsent">O Cordova não está disponível para sua plataforma!</div>
+  <div *ngIf="!cordovaAbsent">
+    <button ion-button icon-left (click)="scan()">
+      <ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Scan</span>
+    </button>
+  </div>
+  
 
   <div *ngIf="waiting">Esperando resposta do servidor!</div>
-  <div *ngIf="cordovaAbsent">O Cordova não está disponível para sua plataforma!</div>
+  
+  <div *ngIf="nfceRegistered">Esta nota fiscal já está cadastrada no sistema!</div>
 
 </ion-content>
