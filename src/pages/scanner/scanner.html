@@ -7,40 +7,12 @@
 </ion-header>
 
 <ion-content padding>
-
-  <!-- {{ keyTeste }} -->
     
   <button ion-button icon-left (click)="scan()">
     <ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Scan</span>
   </button>
 
   <div *ngIf="waiting">Esperando resposta do servidor!</div>
-  <!-- {{ dadosNFCE }} -->
-
-  <!-- <button ion-button icon-left (click)="teste()">
-    <span style="padding-top: 1px">Teste</span>
-  </button>
-
-  <div *ngIf="dadosNFCE">
-    <div><h1>DADOS DA NOTA</h1><hr></div>
-    
-    {{ dadosNFCE.estabelecimento.cnpj }}<br/>
-    {{ dadosNFCE.estabelecimento.endereco }}<br/>
-    {{ dadosNFCE.estabelecimento.inscricao_estadual }}<br/>
-    {{ dadosNFCE.estabelecimento.nome }}<br/><br/>
-    
-    {{ dadosNFCE.nfce.chave_acesso }}<br/>
-    {{ dadosNFCE.nfce.data_emissao }}<br/>
-    {{ dadosNFCE.nfce.hora_emissao }}<br/>
-    {{ dadosNFCE.nfce.numero }}<br/>
-    {{ dadosNFCE.nfce.protocolo }}<br/>
-    {{ dadosNFCE.nfce.serie }}<br/><br/>
-
-    {{ produtos[1].codigo }}
-    {{ produtos[1].descricao }}
-    {{ produtos[1].valor }}
-    {{ produtos[1].un }}<br/><br/>
-    
-  </div> -->
+  <div *ngIf="cordovaAbsent">O Cordova não está disponível para sua plataforma!</div>
 
 </ion-content>

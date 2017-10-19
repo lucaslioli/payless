@@ -19,10 +19,11 @@ export class ScannerPage {
   dadosQR;
   key: string;
   waiting: boolean = false;
+  cordovaAbsent: boolean = false;
 
   // private url: string = 'http://payless.ecoagile.com.br';
-  private url: string = 'http://localhost:8000';
-  // private url: string = '192.168.0.104:8000';
+  // private url: string = 'http://localhost:8000';
+  private url: string = 'http://192.168.0.104:80';
   public dadosNFCE;
 
   constructor(public navCtrl: NavController, 
@@ -41,28 +42,25 @@ export class ScannerPage {
 
       this.scanner.scan(this.options).then(barcodeData => {
         this.dadosQR = barcodeData.text;
+
+        this.key = this.extractKey(this.dadosQR);
+        
+        this.waiting = true;
+    
+        this.http.get(this.url + '/nfce/' + this.key)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.dadosNFCE = data;
+      
+          this.showNfceData();
+        });
       })
 
     } else {
 
-      this.dadosQR = "https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx?chNFe=43170904698507000383650090000250651000250655&" + 
-      "nVersao=100&" + "tpAmb=1&" + "dhEmi=323031372D30392D33305431373A31353A33392D30333A3030&" + "vNF=35.29&" + 
-      "vICMS=0.00&" + "digVal=4251564252544943715A4F42656E485175593636505133306A78773D&" + "cIdToken=000001&" + 
-      "cHashQRCode=494471AA1F1BF1872AF3BC43C753E598C934A1CD";
+      this.cordovaAbsent = true;
       
     }
-
-    this.key = this.extractKey(this.dadosQR);
-
-    this.waiting = true;
-
-    this.http.get(this.url + '/nfce/' + this.key)
-    .map(res => res.json())
-    .subscribe(data => {
-      this.dadosNFCE = data;
-  
-      this.showNfceData();
-    });
     
   }
   
