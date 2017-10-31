@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { Http } from '@angular/http';
 import { Platform } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 
@@ -21,20 +22,36 @@ export class ScannerPage {
   sent: boolean = false;
   cordovaAbsent: boolean = false;
 
-  // private url: string = 'http://payless-api.ecoagile.com.br';
+  private url: string = 'http://payless-api.ecoagile.com.br';
   // private url: string = 'http://localhost:8000';
-  private url: string = 'http://192.168.0.104:9000';
+  // private url: string = 'http://192.168.0.113:9000';
   // public dadosNFCE;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private scanner: BarcodeScanner, 
     public http: Http, 
-    public platform: Platform) {
-      if (!this.platform.is('cordova')) {
-        this.cordovaAbsent = true;
-      }
+    public platform: Platform,
+    public toastCtrl: ToastController) {
+    if (!this.platform.is('cordova')) {
+      this.cordovaAbsent = true;
     }
+  }
+
+  presentToast() {
+    const toast = this.toastCtrl.create({
+      message: this.key,
+      duration: 3000,
+      position: 'top'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
+  }
+  
 
   scan(){
 
@@ -49,6 +66,8 @@ export class ScannerPage {
           this.dadosQR = barcodeData.text;
           
           this.key = this.extractKey(this.dadosQR);
+          // this.key = "43171004698507000383650130000377671000377674";
+          // this.presentToast();
       
           this.http.get(this.url + '/nota/' + this.key)
           .map(res => res.json())
