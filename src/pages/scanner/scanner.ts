@@ -6,7 +6,7 @@ import { Platform } from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 
-import { NfcePage } from '../nfce/nfce';
+// import { NfcePage } from '../nfce/nfce';
 
 @IonicPage()
 @Component({
@@ -18,14 +18,13 @@ export class ScannerPage {
   options: BarcodeScannerOptions;
   dadosQR;
   key: string;
-  waiting: boolean = false;
+  sent: boolean = false;
   cordovaAbsent: boolean = false;
-  nfceRegistered: boolean = false;
 
-  private url: string = 'http://payless-api.ecoagile.com.br';
+  // private url: string = 'http://payless-api.ecoagile.com.br';
   // private url: string = 'http://localhost:8000';
-  // private url: string = 'http://192.168.0.104:80';
-  public dadosNFCE;
+  private url: string = 'http://192.168.0.104:9000';
+  // public dadosNFCE;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -47,26 +46,23 @@ export class ScannerPage {
 
       this.scanner.scan(this.options).then(barcodeData => {
 
-        
           this.dadosQR = barcodeData.text;
           
           this.key = this.extractKey(this.dadosQR);
-          
-          this.waiting = true;
       
-          this.http.get(this.url + '/nfce/' + this.key)
+          this.http.get(this.url + '/nota/' + this.key)
           .map(res => res.json())
           .subscribe(data => {
-            if(data !== "202"){
-              this.dadosNFCE = data;
-          
-              this.showNfceData();
+            if(data == "200"){
+              // this.dadosNFCE = data;
+              // this.showNfceData();
             } else {
-              console.log("Esta nota fiscal já está cadastrada no sistema");
-              this.nfceRegistered = true;
+              console.log("Ocorreu um erro no cadastro da nota fiscal");
             }
+            console.log(data);
           });
-        
+          
+          this.sent = true;
         
       })
 
@@ -78,11 +74,11 @@ export class ScannerPage {
     return textQR.substring(53,97);
   }
 
-  showNfceData(){
-    this.navCtrl.push(NfcePage, {
-      'dadosNFCE': this.dadosNFCE,
-      'key': this.key
-    });
-  }
+  // showNfceData(){
+  //   this.navCtrl.push(NfcePage, {
+  //     'dadosNFCE': this.dadosNFCE,
+  //     'key': this.key
+  //   });
+  // }
 
 }

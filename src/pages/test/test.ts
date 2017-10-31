@@ -18,7 +18,7 @@ export class TestPage {
 	  let url = this.navParams.get('api_url');
 	  let product_id = this.navParams.get('product_id');
 
-    this.http.get(url + '/products/' + product_id)
+    this.http.get(url + '/produtos/' + product_id)
         .map(res => res.json())
         .subscribe(data => {
           console.log(data);

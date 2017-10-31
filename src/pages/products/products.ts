@@ -12,7 +12,9 @@ import 'rxjs/add/operator/map';
 })
 export class ProductsPage {
 
-  private url: string = 'http://payless-api.ecoagile.com.br';
+  // private url: string = 'http://payless-api.ecoagile.com.br';
+  // private url: string = 'http://localhost:8000';
+  private url: string = 'http://192.168.0.104:9000';
   private headers: Headers = new Headers({
     'Content-Type': 'text/plain',
     'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin',
@@ -21,17 +23,38 @@ export class ProductsPage {
   });
   private options: RequestOptions = new RequestOptions({ headers: this.headers });
   public products: Array<{}>;
+  public itens: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: Http
   ) {
-    this.http.get(this.url + '/products', this.options)
+    this.http.get(this.url + '/produtos', this.options)
         .map(res => res.json())
         .subscribe(data => {
           this.products = data;
+          this.itens = this.products;
         });
+  }
+
+  initializeItems() {
+    this.itens = this.products;
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.itens = this.itens.filter((item) => {
+        return (item.descricao.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 
   getProductInfo(id) {

@@ -3,15 +3,16 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Products</ion-title>
+    <ion-title>Produtos</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
-      <button ion-item *ngFor="let p of products" (click)="getProductInfo(p.id)">
-        {{ p.description }}
+      <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.id)">
+        {{ p.descricao }}
       </button>  
     </ion-list>
 </ion-content>
