@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { TestPage } from '../test/test';
+import { Product_detailPage } from '../product_detail/product_detail';
 
 import 'rxjs/add/operator/map';
 
@@ -12,9 +12,9 @@ import 'rxjs/add/operator/map';
 })
 export class ProductsPage {
 
-  private url: string = 'http://payless-api.ecoagile.com.br';
+  // private url: string = 'http://payless-api.ecoagile.com.br';
   // private url: string = 'http://localhost:8000';
-  // private url: string = 'http://192.168.0.113:9000';
+  private url: string = 'http://192.168.43.209:8000';
   private headers: Headers = new Headers({
     'Content-Type': 'text/plain',
     'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin',
@@ -58,7 +58,7 @@ export class ProductsPage {
   }
 
   getProductInfo(id) {
-    this.navCtrl.push(TestPage,
+    this.navCtrl.push(Product_detailPage,
     {
       'product_id': id,
       'api_url': this.url

@@ -6,7 +6,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProductsPageModule } from '../pages/products/products.module';
-import { TestPageModule } from '../pages/test/test.module';
+import { Product_detailPageModule } from '../pages/product_detail/product_detail.module';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ScannerPage } from '../pages/scanner/scanner';
 import { NfcePage } from '../pages/nfce/nfce';
@@ -28,7 +28,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     IonicModule.forRoot(MyApp),
     HttpModule,
     ProductsPageModule,
-    TestPageModule
+    Product_detailPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

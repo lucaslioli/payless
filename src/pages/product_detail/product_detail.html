@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalhes do Produto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      {{ product.descricao }}
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Faixa de Preço:</strong> {{ product.menor_valor }} .. {{ product.maior_valor }}</p>
+      <p><strong>Unidade:</strong> {{ product.un }}</p>
+      <p><strong>Data de Emissão:</strong> {{ product.data_emissao }} </p>
+      <p><strong>Hora de Emissão:</strong> {{ product.hora_emissao }} </p>
+      <p><strong>Local com menor preço:</strong> {{ product.endereco }} </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
