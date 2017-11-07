@@ -4,10 +4,10 @@ import { Http } from '@angular/http';
 
 @IonicPage()
 @Component({
-  selector: 'page-test',
-  templateUrl: 'test.html',
+  selector: 'page-product_detail',
+  templateUrl: 'product_detail.html',
 })
-export class TestPage {
+export class Product_detailPage {
   public product: any = {};
 
   constructor(
@@ -22,13 +22,13 @@ export class TestPage {
         .map(res => res.json())
         .subscribe(data => {
           console.log(data);
-          this.product = data;
+          this.product = data[0];
         });
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TestPage');
+    console.log('ionViewDidLoad Product_detailPage');
   }
 
 }
