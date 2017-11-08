@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-import { HomePage } from '../home/home';
 import { ScannerPage } from '../scanner/scanner';
 import { ProductsPage } from '../products/products';
+import { MapsPage } from '../maps/maps';
 
 /**
  * Generated class for the TabsPage tabs.
@@ -18,7 +18,7 @@ import { ProductsPage } from '../products/products';
 })
 export class TabsPage {
 
-  homeRoot = HomePage
+  mapsRoot = MapsPage
   scannerRoot = ScannerPage
   productsRoot = ProductsPage
 
