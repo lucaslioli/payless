@@ -12,6 +12,7 @@ import { ScannerPage } from '../pages/scanner/scanner';
 import { NfcePage } from '../pages/nfce/nfce';
 import { MapsPage } from '../pages/maps/maps';
 
+import { GoogleMaps } from '@ionic-native/google-maps';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -45,7 +46,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BarcodeScanner
+    BarcodeScanner,
+    GoogleMaps
   ]
 })
 export class AppModule {}
