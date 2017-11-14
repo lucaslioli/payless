@@ -13,11 +13,12 @@
       {{ product.descricao }}
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Faixa de Preço:</strong> {{ product.menor_valor }} .. {{ product.maior_valor }}</p>
-      <p><strong>Unidade:</strong> {{ product.un }}</p>
-      <p><strong>Data de Emissão:</strong> {{ product.data_emissao }} </p>
-      <p><strong>Hora de Emissão:</strong> {{ product.hora_emissao }} </p>
-      <p><strong>Local com menor preço:</strong> {{ product.endereco }} </p>
+      <!-- <p><strong>Faixa de Preço:</strong> {{ product.menor_valor }} .. {{ product.maior_valor }}</p>-->
+      <p><strong>Preço do Produto:</strong> R$ {{ product.valor }}</p>
+      <p><strong>Unidade do Produto:</strong> {{ product.un }}</p>
+      <p><strong>Data de Emissão da Nota:</strong> {{ product.data_emissao }} </p>
+      <p><strong>Hora de Emissão  da Nota:</strong> {{ product.hora_emissao }} </p>
+      <p><strong>Local da compra:</strong> {{ product.endereco }} </p>
     </ion-card-content>
   </ion-card>
 </ion-content>
