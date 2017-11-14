@@ -12,8 +12,8 @@ import 'rxjs/add/operator/map';
 })
 export class ProductsPage {
 
-  // private url: string = 'http://payless-api.ecoagile.com.br';
-  private url: string = 'http://localhost:8001';
+  private url: string = 'http://payless-api.ecoagile.com.br';
+  // private url: string = 'http://localhost:8000';
   // private url: string = 'http://192.168.43.209:8000';
   private headers: Headers = new Headers({
     'Content-Type': 'text/plain',

@@ -22,9 +22,9 @@ export class ScannerPage {
   sent: boolean = false;
   cordovaAbsent: boolean = false;
 
-  private url: string = 'http://payless-api.ecoagile.com.br';
+  // private url: string = 'http://payless-api.ecoagile.com.br';
   // private url: string = 'http://localhost:8000';
-  // private url: string = 'http://192.168.0.113:9000';
+  private url: string = 'http://192.168.0.114:9000';
   // public dadosNFCE;
 
   constructor(public navCtrl: NavController, 
