@@ -7,12 +7,14 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
-      <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.descricao)">
-        {{ p.descricao }}
+      <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.id)">
+        <ion-icon name="beer"></ion-icon>
+        {{ p.descricao }} <p item-end> R$ {{ p.valor }}</p>
+        <ion-icon name="arrow-forward" item-end></ion-icon>
+        <p>&emsp;&nbsp;&nbsp;Atualização: {{ p.data_emissao }}</p>
       </button>
     </ion-list>
 </ion-content>
