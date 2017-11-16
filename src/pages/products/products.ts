@@ -29,13 +29,15 @@ export class ProductsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: Http
-  ) {
+  ) {}
+
+  ionViewWillEnter(){
     this.http.get(this.url + '/produtos', this.options)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.products = data;
-          this.itens = this.products;
-        });
+    .map(res => res.json())
+    .subscribe(data => {
+      this.products = data;
+      this.itens = this.products;
+    });
   }
 
   initializeItems() {

@@ -30,7 +30,10 @@ export class MapsPage {
     private googleMaps: GoogleMaps,
     public http: Http,
     public platform: Platform
-  ) {
+  ) {}
+
+  ionViewWillEnter(){
+
     if (!this.platform.is('cordova')) {
       this.cordovaAbsent = true;
     }
@@ -40,13 +43,17 @@ export class MapsPage {
     .subscribe(data => {
       this.estabelecimentos = data;
     });
-  }
 
-  ngAfterViewInit() {
     this.platform.ready().then(() => {
       this.loadMap();
     });
+
   }
+  // ngAfterViewInit() {
+  //   this.platform.ready().then(() => {
+  //     this.loadMap();
+  //   });
+  // }
 
   getEstabelecimentoInfo(id) {
     this.navCtrl.push(EstablishmentPage,
