@@ -48,34 +48,42 @@ export class MapsPage {
     });
   }
 
-ngAfterViewInit() {
-  this.platform.ready().then(() => {
-    this.loadMap();
-  });
-}
+  ngAfterViewInit() {
+    this.platform.ready().then(() => {
+      this.loadMap();
+    });
+  }
 
-loadMap() {
+  getEstabelecimentoInfo(id) {
+    this.navCtrl.push(EstablishmentPage,
+      {
+        'estabelecimento_id': id,
+        'api_url': this.url
+      });
+  }
 
-  let mapOptions: GoogleMapOptions = {
-    camera: {
-      target: {
-        lat: -29.6873064,
-        lng: -53.8154769
+  loadMap() {
+
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: -29.6873064,
+          lng: -53.8154769
+        },
+        zoom: 11
       },
-      zoom: 11
-    },
-    controls: {
-      compass: true,
-      myLocationButton: true
-    },
-  };
+      controls: {
+        compass: true,
+        myLocationButton: true
+      },
+    };
 
-  this.map = this.googleMaps.create('map', mapOptions);
+    this.map = this.googleMaps.create('map', mapOptions);
 
-  // Wait the MAP_READY before using any methods.
-  this.map.one(GoogleMapsEvent.MAP_READY)
-    .then(() => {
-      
+    // Wait the MAP_READY before using any methods.
+    this.map.one(GoogleMapsEvent.MAP_READY)
+      .then(() => {
+        
       this.estabelecimentos.forEach(element => {
         let req: GeocoderRequest = { address: element.endereco };
 
@@ -90,11 +98,7 @@ loadMap() {
           }).then(marker => {
             marker.on(GoogleMapsEvent.INFO_CLICK)
               .subscribe(() => {
-                  this.navCtrl.push(EstablishmentPage,
-                  {
-                    'estabelecimento_id': element.id,
-                    'api_url': this.url
-                  });
+                this.getEstabelecimentoInfo(element.id);
               });
           });
 
