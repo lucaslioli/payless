@@ -7,6 +7,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProductsPageModule } from '../pages/products/products.module';
 import { Product_detailPageModule } from '../pages/product_detail/product_detail.module';
+import { EstablishmentPageModule } from '../pages/establishment/establishment.module';
 import { MapsPageModule } from '../pages/maps/maps.module';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ScannerPage } from '../pages/scanner/scanner';
@@ -31,6 +32,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HttpModule,
     ProductsPageModule,
     Product_detailPageModule,
+    EstablishmentPageModule,
     MapsPageModule
   ],
   bootstrap: [IonicApp],
