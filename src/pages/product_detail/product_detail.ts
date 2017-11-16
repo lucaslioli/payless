@@ -10,7 +10,7 @@ import { EstablishmentPage } from '../establishment/establishment';
 })
 export class Product_detailPage {
   public product: any = {};
-  private url: string = '';
+  private url: string;
 
   constructor(
   	public navCtrl: NavController,

@@ -9,6 +9,8 @@ import { Http } from '@angular/http';
 })
 export class EstablishmentPage {
   public establishment: any = {};
+  public itens: any;
+  public dados: any;
 
   constructor(
     public navCtrl: NavController,
@@ -22,7 +24,29 @@ export class EstablishmentPage {
         .map(res => res.json())
         .subscribe(data => {
           this.establishment = data;
+          this.dados = this.establishment.dados;
+          this.itens = this.establishment.produtos;
+          // console.log(this.dados);
         });
+  }
+
+  initializeItems() {
+    this.itens = this.establishment.produtos;
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.itens = this.itens.filter((item) => {
+        return (item.descricao.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 
   ionViewDidLoad() {

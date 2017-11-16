@@ -5,12 +5,21 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-card *ngFor="let info of dados">
+      <ion-card-header>  {{ info.nome }} </ion-card-header>
+      <ion-card-content>
+        <p><ion-icon name="pin"></ion-icon> <strong>Endereço:</strong> {{ info.endereco }}</p>
+        <p><ion-icon name="bookmark"></ion-icon> <strong>Notas cadastradas:</strong> {{ info.qtde_notas }}</p>
+        <p><ion-icon name="pricetags"></ion-icon> <strong>Itens cadastrados:</strong> {{ info.qtde_produtos }}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
-      <ion-item *ngFor="let prod of establishment.produtos">
+      <ion-item *ngFor="let prod of itens">
           <ion-avatar item-start>
             <ion-icon name="pricetag"></ion-icon>
           </ion-avatar>
-          <h2>{{ prod.descricao }}<span item-end> R$ {{ prod.valor }}</span></h2>
+          <h2>{{ prod.descricao }}</h2><span item-end> R$ {{ prod.valor }}</span>
           <p>Atualização: {{ prod.data_emissao }}</p>
       </ion-item>
     </ion-list>
