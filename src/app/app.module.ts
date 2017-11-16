@@ -8,10 +8,10 @@ import { HomePage } from '../pages/home/home';
 import { ProductsPageModule } from '../pages/products/products.module';
 import { Product_detailPageModule } from '../pages/product_detail/product_detail.module';
 import { EstablishmentPageModule } from '../pages/establishment/establishment.module';
+import { MapsPageModule } from '../pages/maps/maps.module';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ScannerPage } from '../pages/scanner/scanner';
 import { NfcePage } from '../pages/nfce/nfce';
-import { MapsPage } from '../pages/maps/maps';
 
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -24,8 +24,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
     ScannerPage,
-    NfcePage,
-    MapsPage
+    NfcePage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HttpModule,
     ProductsPageModule,
     Product_detailPageModule,
-    EstablishmentPageModule
+    EstablishmentPageModule,
+    MapsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,8 +41,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
     ScannerPage,
-    NfcePage,
-    MapsPage
+    NfcePage
   ],
   providers: [
     StatusBar,

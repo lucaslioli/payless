@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import {
+  // BaseArrayClass,
+  // CameraPosition,
+  Geocoder,
+  GeocoderRequest,
+  // GeocoderResult,
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
   GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
+  // MarkerOptions,
+  // Marker,
+  // LatLng
  } from '@ionic-native/google-maps';
 
 @IonicPage()
@@ -17,11 +23,30 @@ import {
 })
 export class MapsPage {
 
+  private url: string = 'http://payless-api.ecoagile.com.br';
   public map: GoogleMap;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private googleMaps: GoogleMaps) { }
+  private geocoder: Geocoder;
+  public estabelecimentos: any;
 
-ionViewDidLoad() {
-  this.loadMap();
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private googleMaps: GoogleMaps,
+    public http: Http,
+    public platform: Platform
+  ) {
+    this.geocoder = new Geocoder();
+    this.http.get(this.url + '/estabelecimentos')
+    .map(res => res.json())
+    .subscribe(data => {
+      this.estabelecimentos = data;
+    });
+  }
+
+ngAfterViewInit() {
+  this.platform.ready().then(() => {
+    this.loadMap();
+  });
 }
 
 loadMap() {
@@ -29,12 +54,15 @@ loadMap() {
   let mapOptions: GoogleMapOptions = {
     camera: {
       target: {
-        lat: 43.0741904,
-        lng: -89.3809802
+        lat: -29.6873064,
+        lng: -53.8154769
       },
-      zoom: 18,
-      tilt: 30
-    }
+      zoom: 11
+    },
+    controls: {
+      compass: true,
+      myLocationButton: true
+    },
   };
 
   this.map = this.googleMaps.create('map', mapOptions);
@@ -42,25 +70,24 @@ loadMap() {
   // Wait the MAP_READY before using any methods.
   this.map.one(GoogleMapsEvent.MAP_READY)
     .then(() => {
-      console.log('Map is ready!');
+      
+      this.estabelecimentos.forEach(element => {
+        let req: GeocoderRequest = { address: element.endereco };
 
-      // Now you can use all methods safely.
-      this.map.addMarker({
-          title: 'Ionic',
-          icon: 'blue',
-          animation: 'DROP',
-          position: {
-            lat: 43.0741904,
-            lng: -89.3809802
-          }
-        })
-        .then(marker => {
-          marker.on(GoogleMapsEvent.MARKER_CLICK)
-            .subscribe(() => {
-              alert('clicked');
+        this.geocoder.geocode(req).then((results)=>{
+          if(results[0].position){
+            this.map.addMarker({
+              title: element.nome,
+              icon: 'blue',
+              animation: 'DROP',
+              position: results[0].position
             });
+          }
+        }).catch((err) => {
+          console.log(err);
         });
 
+      });
     });
   }
 }
