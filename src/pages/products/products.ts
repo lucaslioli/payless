@@ -24,6 +24,7 @@ export class ProductsPage {
   private options: RequestOptions = new RequestOptions({ headers: this.headers });
   public products: Array<{}>;
   public itens: any;
+  public qtde: any;
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +38,7 @@ export class ProductsPage {
     .subscribe(data => {
       this.products = data;
       this.itens = this.products;
+      this.qtde = this.products.length;
     });
   }
 

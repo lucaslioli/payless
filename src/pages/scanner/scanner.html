@@ -27,7 +27,8 @@
     </ion-list>
 
     <div *ngIf="!sent">
-      <ion-card-content text-center>Cadastre sua nota e ajude sua comunidade a economizar. Não armazenaremos nenhuma informação do consumidor, utilizamos apenas dados relacionadas aos produtos e ao local da compra.</ion-card-content>
+      <ion-card-content text-center>Desculpe, ocorreu algum problema ao enviar sua nota ao servidor. Por favor, tente novamente mais tarde.</ion-card-content>
+      <!-- <ion-card-content text-center>Cadastre sua nota e ajude sua comunidade a economizar. Não armazenaremos nenhuma informação do consumidor, utilizamos apenas dados relacionadas aos produtos e ao local da compra.</ion-card-content> -->
       <button ion-button icon-left full round large (click)="scan()">
         <ion-icon name="qr-scanner"></ion-icon> <span style="padding-top: 1px">Escanear NFC-e</span>
       </button>
