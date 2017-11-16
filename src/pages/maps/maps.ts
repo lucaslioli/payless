@@ -1,19 +1,14 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { EstablishmentPage } from '../establishment/establishment';
 import {
-  // BaseArrayClass,
-  // CameraPosition,
   Geocoder,
   GeocoderRequest,
-  // GeocoderResult,
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
-  GoogleMapOptions,
-  // MarkerOptions,
-  // Marker,
-  // LatLng
+  GoogleMapOptions
  } from '@ionic-native/google-maps';
 
 @IonicPage()
@@ -27,6 +22,7 @@ export class MapsPage {
   public map: GoogleMap;
   private geocoder: Geocoder;
   public estabelecimentos: any;
+  public cordovaAbsent: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -34,55 +30,79 @@ export class MapsPage {
     private googleMaps: GoogleMaps,
     public http: Http,
     public platform: Platform
-  ) {
+  ) {}
+
+  ionViewWillEnter(){
+
+    if (!this.platform.is('cordova')) {
+      this.cordovaAbsent = true;
+    }
     this.geocoder = new Geocoder();
     this.http.get(this.url + '/estabelecimentos')
     .map(res => res.json())
     .subscribe(data => {
       this.estabelecimentos = data;
     });
+
+    this.platform.ready().then(() => {
+      this.loadMap();
+    });
+
+  }
+  // ngAfterViewInit() {
+  //   this.platform.ready().then(() => {
+  //     this.loadMap();
+  //   });
+  // }
+
+  getEstabelecimentoInfo(id) {
+    this.navCtrl.push(EstablishmentPage,
+      {
+        'estabelecimento_id': id,
+        'api_url': this.url
+      });
   }
 
-ngAfterViewInit() {
-  this.platform.ready().then(() => {
-    this.loadMap();
-  });
-}
+  loadMap() {
 
-loadMap() {
-
-  let mapOptions: GoogleMapOptions = {
-    camera: {
-      target: {
-        lat: -29.6873064,
-        lng: -53.8154769
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: -29.6873064,
+          lng: -53.8154769
+        },
+        zoom: 11
       },
-      zoom: 11
-    },
-    controls: {
-      compass: true,
-      myLocationButton: true
-    },
-  };
+      controls: {
+        compass: true,
+        myLocationButton: true
+      },
+    };
 
-  this.map = this.googleMaps.create('map', mapOptions);
+    this.map = this.googleMaps.create('map', mapOptions);
 
-  // Wait the MAP_READY before using any methods.
-  this.map.one(GoogleMapsEvent.MAP_READY)
-    .then(() => {
-      
+    // Wait the MAP_READY before using any methods.
+    this.map.one(GoogleMapsEvent.MAP_READY)
+      .then(() => {
+        
       this.estabelecimentos.forEach(element => {
         let req: GeocoderRequest = { address: element.endereco };
 
-        this.geocoder.geocode(req).then((results)=>{
-          if(results[0].position){
-            this.map.addMarker({
-              title: element.nome,
-              icon: 'blue',
-              animation: 'DROP',
-              position: results[0].position
-            });
-          }
+        this.geocoder.geocode(req).then((results) => {
+
+          this.map.addMarker({
+            title: element.nome,
+            snippet: 'Clique para visualizar mais informações',
+            icon: 'blue',
+            animation: 'DROP',
+            position: results[0].position
+          }).then(marker => {
+            marker.on(GoogleMapsEvent.INFO_CLICK)
+              .subscribe(() => {
+                this.getEstabelecimentoInfo(element.id);
+              });
+          });
+
         }).catch((err) => {
           console.log(err);
         });
