@@ -3,18 +3,12 @@ import { Http } from '@angular/http';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { EstablishmentPage } from '../establishment/establishment';
 import {
-  // BaseArrayClass,
-  // CameraPosition,
   Geocoder,
   GeocoderRequest,
-  // GeocoderResult,
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
-  GoogleMapOptions,
-  // MarkerOptions,
-  // Marker,
-  // LatLng
+  GoogleMapOptions
  } from '@ionic-native/google-maps';
 
 @IonicPage()
