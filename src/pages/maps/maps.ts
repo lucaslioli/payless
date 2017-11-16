@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { EstablishmentPage } from '../establishment/establishment';
 import {
   // BaseArrayClass,
   // CameraPosition,
@@ -27,6 +28,7 @@ export class MapsPage {
   public map: GoogleMap;
   private geocoder: Geocoder;
   public estabelecimentos: any;
+  public cordovaAbsent: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -35,6 +37,9 @@ export class MapsPage {
     public http: Http,
     public platform: Platform
   ) {
+    if (!this.platform.is('cordova')) {
+      this.cordovaAbsent = true;
+    }
     this.geocoder = new Geocoder();
     this.http.get(this.url + '/estabelecimentos')
     .map(res => res.json())
@@ -74,15 +79,25 @@ loadMap() {
       this.estabelecimentos.forEach(element => {
         let req: GeocoderRequest = { address: element.endereco };
 
-        this.geocoder.geocode(req).then((results)=>{
-          if(results[0].position){
-            this.map.addMarker({
-              title: element.nome,
-              icon: 'blue',
-              animation: 'DROP',
-              position: results[0].position
-            });
-          }
+        this.geocoder.geocode(req).then((results) => {
+
+          this.map.addMarker({
+            title: element.nome,
+            snippet: 'Clique para visualizar mais informações',
+            icon: 'blue',
+            animation: 'DROP',
+            position: results[0].position
+          }).then(marker => {
+            marker.on(GoogleMapsEvent.INFO_CLICK)
+              .subscribe(() => {
+                  this.navCtrl.push(EstablishmentPage,
+                  {
+                    'estabelecimento_id': element.id,
+                    'api_url': this.url
+                  });
+              });
+          });
+
         }).catch((err) => {
           console.log(err);
         });
