@@ -1,27 +1,35 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Scanner
+      Escanear Nota
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   
-  <div *ngIf="cordovaAbsent">O Cordova não está disponível para sua plataforma!</div>
+  <div *ngIf="cordovaAbsent">
+    <ion-slides>
+      <ion-slide>
+        <img src="assets/img/cart.png" class="slide-image"/>
+        <h2 class="slide-title">Desculpe, o Scanner não está disponível para sua plataforma</h2>
+      </ion-slide>
+    </ion-slides>
+  </div>
 
   <div style="text-align:center;" *ngIf="!cordovaAbsent">
 
     <ion-list *ngIf="sent">
-      <ion-item>Sua nota foi enviada ao servidor!</ion-item>
-      <button ion-button icon-left round (click)="scan()">
-        <ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Escanear uma nova nota</span>
+        <ion-card-content text-center>Sua nota foi enviada ao servidor! Ela será processada e verificada pelo nosso sistema, caso esteja tudo certo juntamente ao órgão emissor, em alguns instantes seus produtos já estarão disponíveis para consulta. Obrigado!</ion-card-content>
+      <button ion-button icon-left full round large (click)="scan()">
+        <ion-icon name="qr-scanner"></ion-icon> <span style="padding-top: 1px">Escanear nova NFC-e</span>
       </button>
     </ion-list>
 
     <div *ngIf="!sent">
-      <button ion-button icon-left round (click)="scan()">
-        <ion-icon name="qr-scanner"></ion-icon><span style="padding-top: 1px">Escanear uma nota</span>
+      <ion-card-content text-center>Cadastre sua nota e ajude sua comunidade a economizar. Não armazenaremos nenhuma informação do consumidor, utilizamos apenas dados relacionadas aos produtos e ao local da compra.</ion-card-content>
+      <button ion-button icon-left full round large (click)="scan()">
+        <ion-icon name="qr-scanner"></ion-icon> <span style="padding-top: 1px">Escanear NFC-e</span>
       </button>
     </div>
 

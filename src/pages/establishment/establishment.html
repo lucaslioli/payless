@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Estabelecimento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+      <ion-item *ngFor="let prod of establishment.produtos">
+          <ion-avatar item-start>
+            <ion-icon name="pricetag"></ion-icon>
+          </ion-avatar>
+          <h2>{{ prod.descricao }}<span item-end> R$ {{ prod.valor }}</span></h2>
+          <p>Atualização: {{ prod.data_emissao }}</p>
+      </ion-item>
+    </ion-list>
+</ion-content>

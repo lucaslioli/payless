@@ -3,6 +3,18 @@
     <ion-title>PayLess</ion-title>
   </ion-navbar>
 </ion-header>
+
+<ion-content padding>
+  <div *ngIf="cordovaAbsent">
+    <ion-slides>
+      <ion-slide>
+        <img src="assets/img/cart.png" class="slide-image"/>
+        <h2 class="slide-title">Desculpe, o maps não está disponível para sua plataforma</h2>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
+
 <ion-content padding>
   <div id="map"></div>
 </ion-content>

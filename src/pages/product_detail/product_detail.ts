@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { EstablishmentPage } from '../establishment/establishment';
 
 @IonicPage()
 @Component({
@@ -9,6 +10,7 @@ import { Http } from '@angular/http';
 })
 export class Product_detailPage {
   public product: any = {};
+  private url: string = 'http://127.0.0.1:8001';
 
   constructor(
   	public navCtrl: NavController,
@@ -21,14 +23,20 @@ export class Product_detailPage {
     this.http.get(url + '/produtos/' + product_id)
         .map(res => res.json())
         .subscribe(data => {
-          console.log(data);
           this.product = data[0];
         });
-
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Product_detailPage');
+  }
+
+  getEstablishmentInfo(id) {
+    this.navCtrl.push(EstablishmentPage,
+    {
+      'estabelecimento_id': id,
+      'api_url': this.url
+    });
   }
 
 }
