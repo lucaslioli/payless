@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar [color]="'primary'">
     <ion-title>Lista de Produtos</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding *ngIf="qtde>0">
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
       <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.id)">
@@ -14,5 +14,9 @@
         <p>&emsp;&nbsp;&nbsp;Atualização: {{ p.data_emissao }}</p>
       </button>
     </ion-list>
-    <ion-card-content text-center>Aqui estão listados todos os produtos relacionados a cerveja na região de santa maria</ion-card-content>
+    <ion-card-content text-center>Aqui estão listados todos os produtos relacionados a cerveja.</ion-card-content>
+</ion-content>
+
+<ion-content padding *ngIf="!qtde>0">
+    <ion-card-content text-center>Nenhuma nota cadastrada.</ion-card-content>
 </ion-content>
