@@ -49,5 +49,15 @@ export class EstablishmentPage {
     }
   }
 
+  refreshItems(ev: any){
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // Timeouts in 2 seconds if action is not completed
+    setTimeout(() => {
+      ev.complete();
+    }, 2000);
+
+  }
 
 }
