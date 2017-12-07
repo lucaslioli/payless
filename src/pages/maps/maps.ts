@@ -20,24 +20,21 @@ export class MapsPage {
 
   private url: string = 'http://payless-api.ecoagile.com.br';
   public map: GoogleMap;
-  private geocoder: Geocoder;
   public estabelecimentos: any;
   public cordovaAbsent: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private googleMaps: GoogleMaps,
     public http: Http,
-    public platform: Platform
+    public platform: Platform,
   ) {}
 
-  ionViewWillEnter(){
+  ionViewDidLoad(){
 
     if (!this.platform.is('cordova')) {
       this.cordovaAbsent = true;
     }
-    this.geocoder = new Geocoder();
     this.http.get(this.url + '/estabelecimentos')
     .map(res => res.json())
     .subscribe(data => {
@@ -49,11 +46,6 @@ export class MapsPage {
     });
 
   }
-  // ngAfterViewInit() {
-  //   this.platform.ready().then(() => {
-  //     this.loadMap();
-  //   });
-  // }
 
   getEstabelecimentoInfo(id) {
     this.navCtrl.push(EstablishmentPage,
@@ -75,20 +67,21 @@ export class MapsPage {
       },
       controls: {
         compass: true,
-        myLocationButton: true
+        myLocationButton: true,
+        mapToolbar: true
       },
     };
 
-    this.map = this.googleMaps.create('map', mapOptions);
+    this.map = GoogleMaps.create('map', mapOptions);
 
     // Wait the MAP_READY before using any methods.
     this.map.one(GoogleMapsEvent.MAP_READY)
       .then(() => {
-        
+
       this.estabelecimentos.forEach(element => {
         let req: GeocoderRequest = { address: element.endereco };
 
-        this.geocoder.geocode(req).then((results) => {
+        Geocoder.geocode(req).then((results) => {
 
           this.map.addMarker({
             title: element.nome,

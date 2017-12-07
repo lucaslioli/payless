@@ -16,18 +16,18 @@ export class EstablishmentPage {
     public navCtrl: NavController,
   	public navParams: NavParams,
     public http: Http
-  	) {
-	  let url = this.navParams.get('api_url');
-	  let establishment_id = this.navParams.get('estabelecimento_id');
+  ) {}
 
-    this.http.get(url + '/estabelecimentos/' + establishment_id)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.establishment = data;
-          this.dados = this.establishment.dados;
-          this.itens = this.establishment.produtos;
-          // console.log(this.dados);
-        });
+  ionViewDidLoad() {
+
+    this.http.get(this.navParams.get('api_url') + '/estabelecimentos/' + this.navParams.get('estabelecimento_id'))
+      .map(res => res.json())
+      .subscribe(data => {
+        this.establishment = data;
+        this.dados = this.establishment.dados;
+        this.itens = this.establishment.produtos;
+      });
+
   }
 
   initializeItems() {
@@ -49,8 +49,5 @@ export class EstablishmentPage {
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EstablishmentPage');
-  }
 
 }
