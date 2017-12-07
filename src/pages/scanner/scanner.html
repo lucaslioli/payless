@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar [color]="'primary'">
     <ion-title>
       Escanear Nota
     </ion-title>
@@ -9,12 +9,9 @@
 <ion-content padding>
   
   <div *ngIf="cordovaAbsent">
-    <ion-slides>
-      <ion-slide>
-        <img src="assets/img/cart.png" class="slide-image"/>
-        <h2 class="slide-title">Desculpe, o Scanner não está disponível para sua plataforma</h2>
-      </ion-slide>
-    </ion-slides>
+    <ion-col center text-center>
+      <ion-card-content text-center>Desculpe, o Scanner não está disponível para sua plataforma!</ion-card-content>
+    </ion-col>
   </div>
 
   <div style="text-align:center;" *ngIf="!cordovaAbsent">
@@ -35,6 +32,16 @@
 
     <!-- {{key}} -->
 
+  </div>
+
+  <div>
+    <ion-item>
+      <ion-label stacked>Chave de Acesso:</ion-label>
+      <ion-input #inputKey type="number" value=""></ion-input>
+    </ion-item>
+    <button ion-button icon-left full round large (click)="sendKey(inputKey.value)">
+      <ion-icon name="btnSendKey"></ion-icon> <span style="padding-top: 1px">Enviar</span>
+    </button>
   </div>
 
 </ion-content>

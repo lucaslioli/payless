@@ -22,9 +22,9 @@ export class ScannerPage {
   sent: boolean = false;
   cordovaAbsent: boolean = false;
 
-  // private url: string = 'http://payless-api.ecoagile.com.br';
-  // private url: string = 'http://localhost:8000';
-  private url: string = 'http://192.168.0.114:9000';
+  private url: string = 'http://payless-api.ecoagile.com.br';
+  // private url: string = 'http://localhost:8001';
+  // private url: string = 'http://192.168.0.114:9000';
   // public dadosNFCE;
 
   constructor(public navCtrl: NavController, 
@@ -86,6 +86,21 @@ export class ScannerPage {
       })
 
     }
+    
+  }
+
+  sendKey(inputKey){
+
+    this.http.get(this.url + '/nota/' + inputKey)
+    .map(res => res.json())
+    .subscribe(data => {
+      if(data != "200"){
+        console.log("Ocorreu um erro no cadastro da nota fiscal");
+      }
+      console.log(data);
+    });
+    
+    this.sent = true;
     
   }
   
