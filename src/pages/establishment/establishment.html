@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar [color]="'primary'">
     <ion-title>Estabelecimento</ion-title>
   </ion-navbar>
 </ion-header>
@@ -22,11 +22,10 @@
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
       <ion-item *ngFor="let prod of itens">
-          <ion-avatar item-start>
-            <ion-icon name="pricetag"></ion-icon>
-          </ion-avatar>
-          <h2>{{ prod.descricao }}</h2><span item-end> R$ {{ prod.valor }}</span>
+          <ion-icon item-start name="pricetag"></ion-icon>
+          <span text-wrap>{{ prod.descricao }}</span>
           <p>Atualização: {{ prod.data_emissao }}</p>
+          <span item-end> R$ {{ prod.valor }}</span>
       </ion-item>
     </ion-list>
 </ion-content>
