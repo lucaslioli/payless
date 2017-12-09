@@ -19,7 +19,11 @@ export class EstablishmentPage {
   ) {}
 
   ionViewDidLoad() {
+    this.getEstablishmentInfo();
+  }
 
+  getEstablishmentInfo(){
+    // Requests our API for establishment info and products
     this.http.get(this.navParams.get('api_url') + '/estabelecimentos/' + this.navParams.get('estabelecimento_id'))
       .map(res => res.json())
       .subscribe(data => {
@@ -27,7 +31,6 @@ export class EstablishmentPage {
         this.dados = this.establishment.dados;
         this.itens = this.establishment.produtos;
       });
-
   }
 
   initializeItems() {
@@ -50,8 +53,8 @@ export class EstablishmentPage {
   }
 
   refreshItems(ev: any){
-    // Reset items back to all of the items
-    this.initializeItems();
+    // Refreshes establishment info and products
+    this.getEstablishmentInfo();
 
     // Timeouts in 2 seconds if action is not completed
     setTimeout(() => {
