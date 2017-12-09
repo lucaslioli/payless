@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 @IonicPage()
@@ -15,10 +15,12 @@ export class EstablishmentPage {
   constructor(
     public navCtrl: NavController,
   	public navParams: NavParams,
-    public http: Http
+    public http: Http,
+    public loadingCtrl: LoadingController
   ) {}
 
   ionViewDidLoad() {
+    this.presentLoader();
     this.getEstablishmentInfo();
   }
 
@@ -61,6 +63,21 @@ export class EstablishmentPage {
       ev.complete();
     }, 2000);
 
+  }
+
+  presentLoader(){
+    // Creates loader with custom text
+    let loader = this.loadingCtrl.create({
+      content: 'Carregando...'
+    });
+
+    // Presents loader to user
+    loader.present();
+
+    // Dismisses loader after 1.5 seconds
+    setTimeout(() => {
+      loader.dismiss();
+    }, 1500);
   }
 
 }
