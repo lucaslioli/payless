@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
 import { Product_detailPage } from '../product_detail/product_detail';
 
 import 'rxjs/add/operator/map';
@@ -13,15 +13,6 @@ import 'rxjs/add/operator/map';
 export class ProductsPage {
 
   private url: string = 'http://payless-api.ecoagile.com.br';
-  // private url: string = 'http://127.0.0.1:8001';
-  // private url: string = 'http://192.168.43.209:8000';
-  private headers: Headers = new Headers({
-    'Content-Type': 'text/plain',
-    'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Origin': '*',
-  });
-  private options: RequestOptions = new RequestOptions({ headers: this.headers });
   public products: Array<{}>;
   public itens: any;
   public qtde: any;
@@ -29,11 +20,18 @@ export class ProductsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public http: Http
+    public http: Http,
+    public loadingCtrl: LoadingController
   ) {}
 
-  ionViewWillEnter(){
-    this.http.get(this.url + '/produtos', this.options)
+  ionViewDidLoad(){
+    this.presentLoader();
+    this.getAllProductsInfo();
+  }
+
+  getAllProductsInfo(){
+    // Requests our API for all products info
+    this.http.get(this.url + '/produtos')
     .map(res => res.json())
     .subscribe(data => {
       this.products = data;
@@ -62,11 +60,38 @@ export class ProductsPage {
   }
 
   getProductInfo(id) {
+    // Shows page with product details
     this.navCtrl.push(Product_detailPage,
     {
       'product_id': id,
       'api_url': this.url
     });
+  }
+
+  refreshProducts(ev: any){
+    // Refreshes products
+    this.getAllProductsInfo();
+
+    // Timeouts in 2 seconds
+    setTimeout(() => {
+      ev.complete();
+    }, 2000);
+
+  }
+
+  presentLoader(){
+    // Creates loader with custom text
+    let loader = this.loadingCtrl.create({
+      content: 'Carregando...'
+    });
+
+    // Presents loader to user
+    loader.present();
+
+    // Dismisses loader after 1.5 seconds
+    setTimeout(() => {
+      loader.dismiss();
+    }, 1500);
   }
 
 }

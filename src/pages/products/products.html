@@ -4,7 +4,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding *ngIf="qtde>0">
+<ion-content padding>
+    <ion-refresher (ionRefresh)="refreshProducts($event)">
+      <ion-refresher-content
+        pullingText="Puxe para atualizar"
+        refreshingText="Atualizando...">
+      </ion-refresher-content>
+    </ion-refresher>
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
       <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.id)">
@@ -15,8 +21,4 @@
       </button>
     </ion-list>
     <ion-card-content text-center>Aqui estão listados todos os produtos relacionados a cerveja.</ion-card-content>
-</ion-content>
-
-<ion-content padding *ngIf="!qtde>0">
-    <ion-card-content text-center>Nenhuma nota cadastrada.</ion-card-content>
 </ion-content>
