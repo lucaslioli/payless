@@ -6,7 +6,10 @@
 
 <ion-content padding>
     <ion-refresher (ionRefresh)="refreshItems($event)">
-        <ion-refresher-content></ion-refresher-content>
+        <ion-refresher-content
+          pullingText="Puxe para atualizar"
+          refreshingText="Atualizando...">
+        </ion-refresher-content>
     </ion-refresher>
     <ion-card *ngFor="let info of dados">
       <ion-card-header>  {{ info.nome }} </ion-card-header>
