@@ -5,19 +5,27 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-refresher (ionRefresh)="refreshProducts($event)">
-      <ion-refresher-content
-        pullingText="Puxe para atualizar"
-        refreshingText="Atualizando...">
-      </ion-refresher-content>
-    </ion-refresher>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-list>
-      <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.id)">
-        <ion-icon name="beer"></ion-icon>
-        {{ p.descricao }} <p item-end> R$ {{ p.valor }}</p>
-        <ion-icon name="arrow-forward" item-end></ion-icon>
-        <p>&emsp;&nbsp;&nbsp;Atualização: {{ p.data_emissao }}</p>
-      </button>
-    </ion-list>
+
+  <ion-refresher (ionRefresh)="refreshProducts($event)">
+    <ion-refresher-content
+      pullingText="Puxe para atualizar"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-searchbar
+    placeholder="Procurar"
+    (ionInput)="getItems($event)">
+  </ion-searchbar>
+
+  <ion-list>
+    <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.id)">
+      <ion-icon name="medkit" item-start></ion-icon>
+      <span text-wrap>{{ p.descricao }}</span>
+      <p>Atualização: {{ p.data_emissao }}</p>
+      <p item-end>R$ {{ p.valor }}</p>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </button>
+  </ion-list>
+
 </ion-content>
