@@ -7,41 +7,48 @@
 </ion-header>
 
 <ion-content padding>
-  
-  <div *ngIf="cordovaAbsent">
-    <ion-col center text-center>
-      <ion-card-content text-center>Desculpe, o Scanner não está disponível para sua plataforma!</ion-card-content>
-    </ion-col>
+
+  <div *ngIf="!internetConnection">
+      <ion-col center text-center>
+        <ion-card-content text-center>Você precisa estar conectado à Internet para utilizar o Scanner!</ion-card-content>
+      </ion-col>
   </div>
+  
+  <div *ngIf="internetConnection">
+    <div *ngIf="cordovaAbsent">
+      <ion-col center text-center>
+        <ion-card-content text-center>Desculpe, o Scanner não está disponível para sua plataforma!</ion-card-content>
+      </ion-col>
+    </div>
 
-  <div style="text-align:center;" *ngIf="!cordovaAbsent">
+    <div style="text-align:center;" *ngIf="!cordovaAbsent">
 
-    <ion-list *ngIf="sent">
-        <ion-card-content text-center>Sua nota foi enviada ao servidor! Ela será processada e verificada pelo nosso sistema, caso esteja tudo certo juntamente ao órgão emissor, em alguns instantes seus produtos já estarão disponíveis para consulta. Obrigado!</ion-card-content>
-      <button ion-button icon-left full round large (click)="scan()">
-        <ion-icon name="qr-scanner"></ion-icon> <span style="padding-top: 1px">Escanear nova NFC-e</span>
-      </button>
-    </ion-list>
+      <ion-list *ngIf="sent">
+          <ion-card-content text-center>Sua nota foi enviada ao servidor! Ela será processada e verificada pelo nosso sistema, caso esteja tudo certo juntamente ao órgão emissor, em alguns instantes seus produtos já estarão disponíveis para consulta. Obrigado!</ion-card-content>
+        <button ion-button icon-left full round large (click)="scan()">
+          <ion-icon name="qr-scanner"></ion-icon> <span style="padding-top: 1px">Escanear nova NFC-e</span>
+        </button>
+      </ion-list>
 
-    <div *ngIf="!sent">
-      <ion-card-content text-center>Cadastre sua nota e ajude sua comunidade a economizar. Não armazenaremos nenhuma informação do consumidor, utilizamos apenas dados relacionadas aos produtos e ao local da compra.</ion-card-content>
-      <button ion-button icon-left full round large (click)="scan()">
-        <ion-icon name="qr-scanner"></ion-icon> <span style="padding-top: 1px">Escanear NFC-e</span>
+      <div *ngIf="!sent">
+        <ion-card-content text-center>Cadastre sua nota e ajude sua comunidade a economizar. Não armazenaremos nenhuma informação do consumidor, utilizamos apenas dados relacionadas aos produtos e ao local da compra.</ion-card-content>
+        <button ion-button icon-left full round large (click)="scan()">
+          <ion-icon name="qr-scanner"></ion-icon> <span style="padding-top: 1px">Escanear NFC-e</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div>
+      <ion-item>
+        <ion-label stacked>Chave de Acesso:</ion-label>
+        <ion-input #inputKey type="number" value=""></ion-input>
+      </ion-item>
+      <button ion-button icon-left full round large (click)="sendKey(inputKey.value)">
+        <ion-icon name="btnSendKey"></ion-icon> <span style="padding-top: 1px">Enviar</span>
       </button>
     </div>
 
-    <!-- {{key}} -->
-
-  </div>
-
-  <div>
-    <ion-item>
-      <ion-label stacked>Chave de Acesso:</ion-label>
-      <ion-input #inputKey type="number" value=""></ion-input>
-    </ion-item>
-    <button ion-button icon-left full round large (click)="sendKey(inputKey.value)">
-      <ion-icon name="btnSendKey"></ion-icon> <span style="padding-top: 1px">Enviar</span>
-    </button>
   </div>
 
 </ion-content>

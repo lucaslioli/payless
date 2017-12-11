@@ -4,6 +4,7 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { Http } from '@angular/http';
 import { Platform } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 import 'rxjs/add/operator/map';
 
@@ -21,6 +22,7 @@ export class ScannerPage {
   key: string;
   sent: boolean = false;
   cordovaAbsent: boolean = false;
+  internetConnection: boolean = false;
 
   private url: string = 'http://payless-api.ecoagile.com.br';
   // private url: string = 'http://localhost:8001';
@@ -32,7 +34,8 @@ export class ScannerPage {
     private scanner: BarcodeScanner, 
     public http: Http, 
     public platform: Platform,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public network: Network) {
     if (!this.platform.is('cordova')) {
       this.cordovaAbsent = true;
     }
@@ -108,11 +111,22 @@ export class ScannerPage {
     return textQR.substring(53,97);
   }
 
-  // showNfceData(){
-  //   this.navCtrl.push(NfcePage, {
-  //     'dadosNFCE': this.dadosNFCE,
-  //     'key': this.key
-  //   });
-  // }
+  ionViewDidEnter() {
+    console.log(this.network.type);
+    if(this.network.type == 'none' || this.network.type == 'unknown'){
+      this.internetConnection = false;
+    } else {
+      this.internetConnection = true;
+    }
+    
+    this.network.onConnect().subscribe(data => {
+      this.internetConnection = true;
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    });
+    this.network.onDisconnect().subscribe(data => {
+      this.internetConnection = false;
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    });
+  }
 
 }
