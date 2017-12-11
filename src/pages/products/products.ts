@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { Network } from '@ionic-native/network';
+
 import { Product_detailPage } from '../product_detail/product_detail';
 
 import 'rxjs/add/operator/map';
@@ -16,12 +18,14 @@ export class ProductsPage {
   public products: Array<{}>;
   public itens: any;
   public qtde: any;
+  internetConnection: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: Http,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public network: Network
   ) {}
 
   ionViewDidLoad(){
@@ -92,6 +96,23 @@ export class ProductsPage {
     setTimeout(() => {
       loader.dismiss();
     }, 1500);
+  }
+
+  ionViewDidEnter() {
+    if(this.network.type == 'none' || this.network.type == 'unknown'){
+      this.internetConnection = false;
+    } else {
+      this.internetConnection = true;
+    }
+    
+    this.network.onConnect().subscribe(data => {
+      this.internetConnection = true;
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    });
+    this.network.onDisconnect().subscribe(data => {
+      this.internetConnection = false;
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    });
   }
 
 }

@@ -9,9 +9,12 @@
 <ion-content padding>
 
   <div *ngIf="!internetConnection">
-      <ion-col center text-center>
-        <ion-card-content text-center>Você precisa estar conectado à Internet para utilizar o Scanner!</ion-card-content>
-      </ion-col>
+    <ion-slides>
+      <ion-slide>
+        <img src="assets/img/cart.png" class="slide-image"/>
+        <h2 class="slide-title">Você precisa estar conectado à Internet para utilizar o Scanner!</h2>
+      </ion-slide>
+    </ion-slides>
   </div>
   
   <div *ngIf="internetConnection">

@@ -5,6 +5,17 @@
 </ion-header>
 
 <ion-content padding>
+
+  <div *ngIf="!internetConnection">
+      <ion-slides>
+        <ion-slide>
+          <img src="assets/img/cart.png" class="slide-image"/>
+          <h2 class="slide-title">Você precisa estar conectado à Internet para ver a lista de produtos!</h2>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+  <div *ngIf="internetConnection">
     <ion-refresher (ionRefresh)="refreshProducts($event)">
       <ion-refresher-content
         pullingText="Puxe para atualizar"
@@ -20,4 +31,5 @@
         <p>&emsp;&nbsp;&nbsp;Atualização: {{ p.data_emissao }}</p>
       </button>
     </ion-list>
+  </div>
 </ion-content>

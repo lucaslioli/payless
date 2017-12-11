@@ -8,8 +8,6 @@ import { Network } from '@ionic-native/network';
 
 import 'rxjs/add/operator/map';
 
-// import { NfcePage } from '../nfce/nfce';
-
 @IonicPage()
 @Component({
   selector: 'page-scanner',

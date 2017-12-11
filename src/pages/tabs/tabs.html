@@ -1,4 +1,13 @@
-<ion-tabs [color]="'primary'">
+<div *ngIf="!internetConnection">
+    <ion-slides>
+        <ion-slide>
+            <img src="assets/img/cart.png" class="slide-image"/>
+            <h2 class="slide-title">Para usar este aplicativo você precisa de uma conexão à Internet!</h2>
+        </ion-slide>
+    </ion-slides>
+</div>
+
+<ion-tabs [color]="'primary'" *ngIf="internetConnection">
     <ion-tab [root]="mapsRoot" tabTitle="Mapa" tabIcon="ios-map-outline"></ion-tab>
     <ion-tab [root]="productsRoot" tabTitle="Produtos" tabIcon="ios-pricetags-outline"></ion-tab>
     <ion-tab [root]="scannerRoot" tabTitle="Scanner" tabIcon="qr-scanner"></ion-tab>
