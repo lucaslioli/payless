@@ -23,6 +23,7 @@ export class ScannerPage {
   sent: boolean = false;
   cordovaAbsent: boolean = false;
   internetConnection: boolean = false;
+  invalidInput: boolean = false;
 
   private url: string = 'http://payless-api.ecoagile.com.br';
   // private url: string = 'http://localhost:8001';
@@ -94,16 +95,24 @@ export class ScannerPage {
 
   sendKey(inputKey){
 
-    this.http.get(this.url + '/nota/' + inputKey)
-    .map(res => res.json())
-    .subscribe(data => {
-      if(data != "200"){
-        console.log("Ocorreu um erro no cadastro da nota fiscal");
-      }
-      console.log(data);
-    });
+    if(inputKey.length == 44){
+      this.http.get(this.url + '/nota/' + inputKey)
+      .map(res => res.json())
+      .subscribe(data => {
+        if(data != "200"){
+          console.log("Ocorreu um erro no cadastro da nota fiscal");
+        }
+        console.log(data);
+      });
+      
+      this.sent = true;
+      this.invalidInput = false;
+
+    } else {
+      this.invalidInput = true;
+    }
+
     
-    this.sent = true;
     
   }
   
