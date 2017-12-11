@@ -4,7 +4,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding scrollbar-y-auto>
+
+  <ion-refresher (ionRefresh)="refreshProducts($event)">
+    <ion-refresher-content
+      pullingText="Puxe para atualizar"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <div *ngIf="!internetConnection">
       <ion-slides>
@@ -16,12 +23,6 @@
     </div>
 
   <div *ngIf="internetConnection">
-    <ion-refresher (ionRefresh)="refreshProducts($event)">
-      <ion-refresher-content
-        pullingText="Puxe para atualizar"
-        refreshingText="Atualizando...">
-      </ion-refresher-content>
-    </ion-refresher>
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
       <button ion-item *ngFor="let p of itens" (click)="getProductInfo(p.id)">
