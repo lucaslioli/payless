@@ -84,7 +84,7 @@ export class MapsPage {
         Geocoder.geocode(req).then((results) => {
 
           this.map.addMarker({
-            title: element.nome,
+            title: element.endereco,
             snippet: 'Clique para visualizar mais informações',
             icon: 'blue',
             animation: 'DROP',
