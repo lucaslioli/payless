@@ -1,7 +1,7 @@
 {
-    "name": "payless-app",
+    "name": "precify-app",
     "version": "0.0.1",
-    "author": "Ionic Framework",
+    "author": "MLK Team",
     "homepage": "http://ionicframework.com/",
     "private": true,
     "scripts": {
