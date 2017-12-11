@@ -121,7 +121,6 @@ export class ScannerPage {
   }
 
   ionViewDidEnter() {
-    console.log(this.network.type);
     if(this.network.type == 'none' || this.network.type == 'unknown'){
       this.internetConnection = false;
     } else {

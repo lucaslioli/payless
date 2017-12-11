@@ -13,5 +13,15 @@
       </ion-slide>
     </ion-slides>
   </div>
+  <div *ngIf="!cordovaAbsent">
+    <div *ngIf="!internetConnection">
+      <ion-slides>
+        <ion-slide>
+          <img src="assets/img/cart.png" class="slide-image"/>
+          <h2 class="slide-title">Você precisa estar conectado à Internet para usar o Mapa</h2>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
   <div id="map" *ngIf="!cordovaAbsent"></div>
 </ion-content>

@@ -10,6 +10,7 @@ import {
   GoogleMapsEvent,
   GoogleMapOptions
  } from '@ionic-native/google-maps';
+import { Network } from '@ionic-native/network';
 
 @IonicPage()
 @Component({
@@ -22,12 +23,14 @@ export class MapsPage {
   public map: GoogleMap;
   public estabelecimentos: any;
   public cordovaAbsent: boolean = false;
+  internetConnection: boolean = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public http: Http,
     public platform: Platform,
+    public network: Network
   ) {}
 
   ionViewDidLoad(){
@@ -35,14 +38,39 @@ export class MapsPage {
     if (!this.platform.is('cordova')) {
       this.cordovaAbsent = true;
     }
-    this.http.get(this.url + '/estabelecimentos')
-    .map(res => res.json())
-    .subscribe(data => {
-      this.estabelecimentos = data;
+
+    if(this.network.type == 'none' || this.network.type == 'unknown'){
+      this.internetConnection = false;
+    } else {
+      this.internetConnection = true;
+      this.http.get(this.url + '/estabelecimentos')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.estabelecimentos = data;
+      });
+  
+      this.platform.ready().then(() => {
+        this.loadMap();
+      });
+    }
+
+    this.network.onConnect().subscribe(data => {
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+      this.internetConnection = true;
+      this.http.get(this.url + '/estabelecimentos')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.estabelecimentos = data;
+      });
+  
+      this.platform.ready().then(() => {
+        this.loadMap();
+      });
     });
 
-    this.platform.ready().then(() => {
-      this.loadMap();
+    this.network.onDisconnect().subscribe(data => {
+      this.internetConnection = false;
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
     });
 
   }
