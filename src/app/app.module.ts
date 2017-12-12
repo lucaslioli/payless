@@ -8,9 +8,9 @@ import { ProductsPageModule } from '../pages/products/products.module';
 import { Product_detailPageModule } from '../pages/product_detail/product_detail.module';
 import { EstablishmentPageModule } from '../pages/establishment/establishment.module';
 import { MapsPageModule } from '../pages/maps/maps.module';
-import { TabsPage } from '../pages/tabs/tabs';
-import { ScannerPage } from '../pages/scanner/scanner';
-import { NfcePage } from '../pages/nfce/nfce';
+import { TabsPageModule } from '../pages/tabs/tabs.module';
+import { ScannerPageModule } from '../pages/scanner/scanner.module';
+import { NfcePageModule } from '../pages/nfce/nfce.module';
 
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -20,10 +20,7 @@ import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
-    MyApp,
-    TabsPage,
-    ScannerPage,
-    NfcePage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -32,14 +29,14 @@ import { Network } from '@ionic-native/network';
     ProductsPageModule,
     Product_detailPageModule,
     EstablishmentPageModule,
-    MapsPageModule
+    MapsPageModule,
+    TabsPageModule,
+    ScannerPageModule,
+    NfcePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    TabsPage,
-    ScannerPage,
-    NfcePage
+    MyApp
   ],
   providers: [
     StatusBar,
