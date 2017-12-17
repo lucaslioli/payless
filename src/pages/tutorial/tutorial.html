@@ -1,0 +1,45 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">Skip</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-1.png" class="slide-image"/>
+      <h2 class="slide-title">
+        Obrigado por instalar o <b>Precify Farma</b>
+      </h2>
+      <p>
+        O <b>Precify Farma</b> é um aplicativo que permite que você encontre produtos farmacêuticos pelo melhor preço.
+      </p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-2.png" class="slide-image"/>
+      <h2 class="slide-title" >Como funciona o <b>Precify</b>?</h2>
+      <p>A comunidade <b>Precify</b> mantém uma base de informações atualizadas com todas as farmácias perto de você.</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-3.png" class="slide-image"/>
+      <h2 class="slide-title">Posso participar da comunidade <b>Precify</b>?</h2>
+      <p>Claro! Para começar a ajudar basta você abrir o aplicativo e escanear as notas fiscais das suas compras farmacêuticas.</p>
+      <p>Nós não coletamos qualquer dado do usuário, somente as informações dos produtos que ele deseja compartilhar.</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/>
+      <h2 class="slide-title">Pronto para começar?</h2>
+      <button ion-button icon-end large clear (click)="startApp()">
+        Continuar
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

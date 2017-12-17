@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
+
+import { TutorialPage } from '../pages/tutorial/tutorial';
 import { TabsPage } from '../pages/tabs/tabs'
 
 @Component({
@@ -10,10 +13,23 @@ import { TabsPage } from '../pages/tabs/tabs'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = TabsPage;
+  rootPage: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+  constructor(
+    public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen, 
+    public storage: Storage) {
+
+    this.storage.get('hasSeenTutorial')
+    .then((hasSeenTutorial) => {
+      if (hasSeenTutorial) {
+        this.rootPage = TabsPage;
+      } else {
+        this.rootPage = TutorialPage;
+      }
+      this.initializeApp();
+    });
 
   }
 
