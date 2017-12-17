@@ -7,7 +7,7 @@ Este projeto está sendo desenvolvido para a disciplina de Projeto de Software I
 
 ## Membros do grupo
 #### Alunos 
-Franciel Krein ([fkrein](https://github.com/fkrein)), Lucas Lima de Oliveira ([lucaslioli](https://github.com/lucaslioli)) e Luis Henrique Medeiros ([zillyy](https://github.com/zillyy)).
+Franciel Krein ([fkrein](https://github.com/fkrein)), Lucas Lima de Oliveira ([lucaslioli](https://github.com/lucaslioli)) e Luis Henrique Medeiros ([zillyy](https://github.com/notzilly)).
 #### Orientador(a)
 Professora Dra. Andrea Charão
 
